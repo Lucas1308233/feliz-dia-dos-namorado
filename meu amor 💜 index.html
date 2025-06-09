@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Dia dos Namorados 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Great+Vibes&family=Satisfy&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      /* Fundo adaptado para celular: background-attachment agora é 'scroll' */
+      background: #000 url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3BwbHViam5kb3VvM3hodjI5Mnh4ZzUyNG1jMmo5NjlzNDgxcTlzaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfZWQmY3Q9Zw/RALmGEgzjtxmqcfUqD/giphy.gif') center center / cover no-repeat;
+      background-attachment: scroll; /* Melhor para compatibilidade e performance em dispositivos móveis */
+
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding: 20px 15px;
+      position: relative;
+    }
+
+    /* Container lanternas */
+    .lantern-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* Cada lanterna */
+    .lantern {
+      position: absolute;
+      bottom: -40px;
+      width: 20px;
+      height: 30px;
+      background: radial-gradient(circle at 50% 40%, #ffdba7, #ff9933);
+      border-radius: 50% / 70%;
+      box-shadow:
+        0 0 12px 3px #ffcc80,
+        0 0 25px 6px #ff9933;
+      opacity: 0.88;
+      filter: drop-shadow(0 0 6px #ffcc80);
+      animation-name: lantern-rise, lantern-flicker;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+    }
+
+    /* Efeito "flicker" da lanterna */
+    @keyframes lantern-flicker {
+      0%, 100% { opacity: 0.88; }
+      50% { opacity: 0.7; }
+    }
+
+    /* Movimento subindo */
+    @keyframes lantern-rise {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.88;
+      }
+      100% {
+        transform: translateY(-110vh) translateX(15px) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* Ajustes para múltiplas lanternas - posição e delays */
+    .lantern:nth-child(1) {
+      left: 10%;
+      animation-duration: 14s;
+      animation-delay: 0s;
+    }
+
+    .lantern:nth-child(2) {
+      left: 25%;
+      animation-duration: 18s;
+      animation-delay: 4s;
+      animation-direction: reverse;
+    }
+
+    .lantern:nth-child(3) {
+      left: 40%;
+      animation-duration: 16s;
+      animation-delay: 2s;
+    }
+
+    .lantern:nth-child(4) {
+      left: 60%;
+      animation-duration: 20s;
+      animation-delay: 3.5s;
+      animation-direction: reverse;
+    }
+
+    .lantern:nth-child(5) {
+      left: 75%;
+      animation-duration: 15s;
+      animation-delay: 1.5s;
+    }
+
+    .lantern:nth-child(6) {
+      left: 85%;
+      animation-duration: 17s;
+      animation-delay: 0.8s;
+      animation-direction: reverse;
+    }
+
+    /* Conteúdo principal */
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 45px 35px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 50px rgba(255, 182, 193, 0.5);
+      border: 2px solid rgba(255, 182, 193, 0.4);
+    }
+
+    h1 {
+      font-family: 'Satisfy', cursive;
+      font-size: 3.5rem;
+      font-weight: normal;
+      margin-bottom: 30px;
+      color: #ffb3e6;
+      text-shadow: 3px 3px 12px #ff66b2;
+      letter-spacing: 1.8px;
+    }
+
+    h1 span {
+      color: #ffe4e1;
+      text-shadow: 2px 2px 10px #ffb3d9;
+    }
+
+    /* --- Botão 'amor' estilizado e animado --- */
+    .heart-btn {
+      font-size: 2.4rem;
+      margin: 25px 15px;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      user-select: none;
+
+      background: linear-gradient(135deg, #ff69b4, #ff007f, #ee82ee);
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 0 20px rgba(255, 105, 180, 0.9),
+        0 0 40px rgba(255, 0, 127, 0.7) inset;
+
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      animation: pulseGlow 2s infinite alternate ease-in-out;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.2) rotate(4deg);
+      box-shadow:
+        0 0 30px rgba(255, 105, 180, 1),
+        0 0 50px rgba(255, 0, 127, 0.9) inset;
+      border-color: #ffcced;
+      animation: heartBeatHover 0.8s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.9), 0 0 40px rgba(255, 0, 127, 0.7) inset; }
+      50% { box-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 60px rgba(255, 0, 127, 1) inset; }
+      100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.9), 0 0 40px rgba(255, 0, 127, 0.7) inset; }
+    }
+
+    @keyframes heartBeatHover {
+        0% { transform: scale(1.2) rotate(4deg); }
+        50% { transform: scale(1.25) rotate(-4deg); }
+        100% { transform: scale(1.2) rotate(4deg); }
+    }
+    /* --- Fim do botão 'amor' estilizado e animado --- */
+
+
+    .hidden-message {
+      display: none;
+      margin-top: 50px;
+      font-size: 1.6rem;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    /* --- Estilização do texto da mensagem --- */
+    .message-text {
+        font-family: 'Dancing Script', cursive;
+        font-size: 3.2rem;
+        color: #fff0f5;
+        text-shadow:
+          3px 3px 12px #ff69b4,
+          3px 3px 18px #ffc0cb,
+          3px 3px 25px #ffffff;
+        line-height: 1.4;
+        padding: 60px 50px;
+        border-radius: 35px;
+        background: rgba(255, 255, 255, 0.3);
+        box-shadow:
+          0 0 70px rgba(255, 105, 180, 0.9),
+          0 0 90px rgba(255, 182, 193, 0.7) inset;
+        backdrop-filter: blur(22px);
+        border: 4px double rgba(255, 200, 220, 0.9);
+        margin-bottom: 50px;
+        animation: textFloat 5s ease-in-out infinite, textFadeIn 1.5s ease-out;
+    }
+
+    @keyframes textFadeIn {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-text strong {
+        font-family: 'Dancing Script', cursive;
+        color: #ff3399;
+        text-shadow:
+            2px 2px 10px #ff66b2,
+            2px 2px 15px #ff0077;
+        font-weight: normal;
+    }
+
+    .message-text .emoticon {
+        font-size: 3.2rem;
+        vertical-align: middle;
+        margin: 0 12px;
+        animation: pulse 1.2s infinite alternate;
+        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.15); }
+        100% { transform: scale(1); }
+    }
+    /* --- Fim da estilização do texto da mensagem --- */
+
+
+    .footer {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.3rem;
+      font-weight: normal;
+      font-style: normal;
+      color: #ffe4e1;
+      background-color: rgba(255, 182, 193, 0.45);
+      padding: 25px 45px;
+      border-radius: 30px;
+      box-shadow:
+        0 0 30px rgba(255, 105, 180, 0.9),
+        0 0 50px rgba(255, 182, 193, 0.7) inset;
+      text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8), 0 0 20px #ff66b2;
+      z-index: 2;
+      position: relative;
+      letter-spacing: 0.12em;
+      display: inline-block;
+      transition: all 0.3s ease-in-out;
+      border: 3px solid rgba(255, 228, 225, 0.8);
+    }
+
+    .footer:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow:
+            0 0 40px rgba(255, 105, 180, 1),
+            0 0 60px rgba(255, 182, 193, 0.9) inset;
+    }
+
+    /* --- Galeria estilizada --- */
+    .gallery {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 45px;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 35px;
+      background: linear-gradient(145deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2));
+      border-radius: 35px;
+      box-shadow:
+        0 0 70px rgba(255, 105, 180, 0.5),
+        inset 0 0 45px rgba(255, 200, 220, 0.3);
+      position: relative;
+      overflow: visible;
+      border: 3px solid rgba(255, 182, 193, 0.6);
+      animation: galleryLoadIn 1.5s ease-out forwards;
+    }
+
+    @keyframes galleryLoadIn {
+        from { opacity: 0; transform: scale(0.85) translateY(30px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Pequenos corações flutuantes */
+    .gallery::before,
+    .gallery::after {
+      content: '💖';
+      position: absolute;
+      font-size: 35px;
+      color: #ff66b2;
+      opacity: 0.5;
+      animation: floatHeart 8s ease-in-out infinite;
+      user-select: none;
+      pointer-events: none;
+      filter: drop-shadow(0 0 7px #ffcced);
+    }
+
+    .gallery::before {
+      top: -25px;
+      left: 7%;
+      animation-delay: 0s;
+      transform: rotate(12deg);
+    }
+
+    .gallery::after {
+      bottom: -25px;
+      right: 9%;
+      animation-delay: 4s;
+      font-size: 40px;
+      transform: rotate(-18deg);
+    }
+
+    @keyframes floatHeart {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5;}
+      25% { transform: translateY(-20px) rotate(8deg); opacity: 0.6;}
+      50% { transform: translateY(0) rotate(0deg); opacity: 0.5;}
+      75% { transform: translateY(20px) rotate(-8deg); opacity: 0.6;}
+    }
+
+    /* Wrapper para o efeito de polaroid */
+    .gallery-item-wrapper {
+        position: relative;
+        perspective: 1000px;
+        animation: itemFadeIn 1s ease-out forwards;
+        opacity: 0;
+    }
+    .gallery-item-wrapper:nth-child(2) { animation-delay: 0.25s; }
+    .gallery-item-wrapper:nth-child(3) { animation-delay: 0.5s; }
+    .gallery-item-wrapper:nth-child(4) { animation-delay: 0.75s; }
+
+    @keyframes itemFadeIn {
+        from { opacity: 0; transform: translateY(30px) rotateX(-30deg); }
+        to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ffcce0, #ff80cc);
+      box-shadow:
+        0 10px 30px rgba(255, 105, 180, 0.7),
+        inset 0 0 18px rgba(255, 182, 193, 1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+      cursor: pointer;
+      border: 5px solid transparent;
+      background-clip: padding-box;
+      transform-origin: center center;
+      transition: transform 0.3s ease-out;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.1) rotate(3deg);
+      box-shadow:
+        0 25px 50px rgba(255, 105, 180, 1.2),
+        inset 0 0 30px rgba(255, 182, 193, 1.5);
+      border-image: linear-gradient(45deg, #ff3399, #ff99cc) 1;
+      border-style: solid;
+      border-width: 5px;
+      z-index: 3;
+      animation: polaroidShake 0.6s infinite alternate;
+    }
+
+    @keyframes polaroidShake {
+        0% { transform: rotate(3deg) scale(1.1); }
+        50% { transform: rotate(-3deg) scale(1.12); }
+        100% { transform: rotate(3deg) scale(1.1); }
+    }
+
+    /* Estilo de moldura de polaroid */
+    .polaroid-frame {
+        position: relative;
+        background: #ffffff;
+        padding: 12px 12px 35px 12px;
+        border-radius: 10px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        transform: rotate(var(--rotation, 0deg));
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item-wrapper:nth-child(odd) .polaroid-frame { --rotation: -3deg; }
+    .gallery-item-wrapper:nth-child(even) .polaroid-frame { --rotation: 3deg; }
+    .gallery-item-wrapper:hover .polaroid-frame { --rotation: 0deg; }
+
+
+    .gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 7px;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(255, 182, 193, 1));
+      transition: filter 0.4s ease, transform 0.4s ease;
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    .gallery-item:hover img {
+      filter: drop-shadow(0 0 30px rgba(255, 182, 193, 1.5));
+      transform: scale(1.05) translateY(-8px);
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 12px 10px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #330033;
+      background: none;
+      text-shadow: none;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: auto;
+      opacity: 1;
+      transition: color 0.3s ease;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .gallery-item:hover .caption {
+      color: #ff0077;
+    }
+
+    /* Corações que surgem no hover */
+    .gallery-item::before {
+      content: '💖';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 4.5em;
+      color: #ff66b2;
+      opacity: 0;
+      transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+      z-index: 10;
+      pointer-events: none;
+      filter: drop-shadow(0 0 10px #ffcced);
+    }
+
+    .gallery-item:hover::before {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.9;
+      animation: heartBeat 0.8s infinite alternate;
+    }
+
+    @keyframes heartBeat {
+        0% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.9; }
+        100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+    /* --- Fim da galeria estilizada --- */
+
+
+    /* --- Media Queries para Responsividade --- */
+    @media (max-width: 992px) { /* Para tablets e telas um pouco menores */
+      .container {
+        padding: 40px 30px;
+        max-width: 700px;
+      }
+      h1 { font-size: 3.0rem; }
+      .heart-btn { font-size: 2.2rem; padding: 13px 28px; }
+      .message-text { font-size: 2.8rem; padding: 50px 40px; }
+      .footer { font-size: 2.1rem; padding: 22px 40px; }
+      .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        padding: 30px;
+      }
+      .gallery-item img { height: 250px; }
+      .caption { font-size: 1.35rem; }
+    }
+
+    @media (max-width: 768px) { /* Para tablets em modo retrato e celulares grandes */
+      body {
+        /* Garante que o fundo também se adapta em telas menores se houver inconsistências */
+        background-image: url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3BwbHViam5kb3VvM3hodjI5Mnh4ZzUyNG1jMmo5NjlzNDgxcTlzaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfZWQmY3Q9Zw/RALmGEgzjtxmqcfUqD/giphy.gif');
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: scroll; /* Fundamental para celulares */
+      }
+      .container {
+        padding: 30px 20px;
+        border-radius: 25px;
+        max-width: 95%; /* Ocupa quase toda a largura */
+      }
+      h1 { font-size: 2.5rem; letter-spacing: 1.5px; }
+      h1 span { font-size: 1em; } /* Mantém a proporção */
+      .heart-btn { font-size: 1.8rem; padding: 10px 24px; margin: 20px 10px; }
+      .hidden-message { margin-top: 40px; font-size: 1.4rem; line-height: 1.7; }
+      .message-text {
+        font-size: 2.2rem; /* Mais visível no celular */
+        padding: 40px 30px;
+        line-height: 1.5;
+        border-radius: 30px;
+        text-shadow: 2px 2px 10px #ff69b4, 2px 2px 14px #ffc0cb, 2px 2px 18px #ffffff; /* Sombra ajustada */
+      }
+      .message-text strong { font-size: 2.2rem; text-shadow: 1px 1px 8px #ff66b2, 1px 1px 12px #ff0077; }
+      .message-text .emoticon { font-size: 2.2rem; margin: 0 8px; }
+      .footer {
+        font-size: 1.9rem;
+        padding: 18px 30px;
+        border-radius: 25px;
+        text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7), 0 0 15px #ff66b2;
+      }
+      .gallery {
+        grid-template-columns: 1fr; /* Uma coluna para celulares */
+        gap: 30px;
+        padding: 25px;
+        border-radius: 25px;
+      }
+      .gallery-item img { height: 220px; border-radius: 6px; }
+      .caption { font-size: 1.25rem; padding: 10px 8px; }
+      .polaroid-frame { padding: 10px 10px 30px 10px; border-radius: 8px; }
+      .gallery-item::before { font-size: 4em; } /* Coração um pouco menor */
+    }
+
+    @media (max-width: 576px) { /* Para celulares menores */
+      body { padding: 15px 10px; }
+      h1 { font-size: 2.0rem; letter-spacing: 1px; margin-bottom: 25px; }
+      .heart-btn { font-size: 1.6rem; padding: 8px 20px; margin: 15px 8px; }
+      .hidden-message { margin-top: 30px; font-size: 1.2rem; line-height: 1.6; }
+      .message-text {
+        font-size: 1.9rem; /* Continua legível e grande */
+        padding: 30px 20px;
+        line-height: 1.4;
+        text-shadow: 1px 1px 8px #ff69b4, 1px 1px 10px #ffc0cb, 1px 1px 12px #ffffff; /* Sombra mais sutil */
+      }
+      .message-text strong { font-size: 1.9rem; text-shadow: 1px 1px 6px #ff66b2, 1px 1px 9px #ff0077; }
+      .message-text .emoticon { font-size: 1.9rem; margin: 0 6px; }
+      .footer {
+        font-size: 1.6rem;
+        padding: 15px 25px;
+        letter-spacing: 0.08em;
+      }
+      .gallery {
+        gap: 20px;
+        padding: 15px;
+      }
+      .gallery-item img { height: 180px; }
+      .caption { font-size: 1.1rem; padding: 8px 6px; }
+      .polaroid-frame { padding: 8px 8px 25px 8px; }
+
+      /* Modal de vídeo em telas pequenas */
+      .video-modal-content {
+        width: 98%; /* Ocupa quase toda a largura */
+        border-radius: 10px;
+      }
+      .close-button {
+        font-size: 30px;
+        top: 5px;
+        right: 15px;
+      }
+      .video-wrapper iframe, .video-wrapper video {
+        border-width: 4px; /* Borda um pouco mais fina */
+        border-radius: 10px;
+      }
+    }
+    /* --- Fim das Media Queries --- */
+
+    @keyframes fadeInMessage {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .fadeInMessage {
+      animation: fadeInMessage 0.8s ease forwards;
+    }
+
+    /* Estilos para o Modal de Vídeo */
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .video-modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #888;
+      width: 95%;
+      max-width: 850px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      animation-name: animatetop;
+      animation-duration: 0.4s;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* Animação de entrada do modal */
+    @keyframes animatetop {
+      from {top: -400px; opacity: 0}
+      to {top: 0; opacity: 1}
+    }
+
+    .close-button {
+      color: #fff;
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+      z-index: 101;
+      text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    }
+
+    .close-button:hover,
+    .close-button:focus {
+      color: #ddd;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #000;
+    }
+
+    /* Estilo para a borda do vídeo (MAIS ESTILIZADA E ROMÂNTICA) */
+    .video-wrapper iframe, .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 8px double #ff99cc;
+      border-radius: 18px;
+      box-shadow: 0 0 30px 10px rgba(255, 102, 178, 0.7);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #fcecf6;
+    }
+
+    .video-wrapper iframe:hover, .video-wrapper video:hover {
+      border-color: #ff3399;
+      box-shadow: 0 0 45px 12px rgba(255, 102, 178, 0.9);
+    }
+
+    @keyframes textFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="lantern-container">
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+    <div class="lantern"></div>
+  </div>
+
+  <main class="container">
+    <h1>Feliz Dia dos Namorados<br><span style="font-family: 'Satisfy', cursive;">Minha princesa 🤍</span></h1>
+
+    <button class="heart-btn" onclick="toggleMessage()">💜 amor 💜</button>
+
+    <div class="hidden-message" id="msg">
+      <p class="message-text">
+        <strong style="color: #ff3399; text-shadow: 2px 2px 10px #ff66b2, 2px 2px 15px #ff0077; font-size: 3.2rem; font-weight: normal;">Beatriz</strong>, neste dia <strong style="color: #f0f8ff; text-shadow: 1px 1px 8px #add8e6;">mágico</strong>, quero te lembrar o quanto você é <strong style="color: #ffff00; text-shadow: 1px 1px 8px #ffd700;">incrível</strong> e o quanto te amo. <span class="emoticon" style="font-size: 3.2rem;">💞</span><br>
+        Que nosso <strong style="color: #ff00ff; text-shadow: 1px 1px 8px #ff69b4;">amor</strong> brilhe como as <strong style="color: #ffa500; text-shadow: 1px 1px 8px #ff8c00;">lanternas no céu</strong> e floresça como os <strong style="color: #98fb98; text-shadow: 1px 1px 8px #90ee90;">sonhos da Rapunzel</strong>. <span class="emoticon" style="font-size: 3.2rem;">🌸</span><br>
+        Você é minha <strong style="color: #ee82ee; text-shadow: 1px 1px 8px #da70d6;">princesa</strong>, meu <strong style="color: #ffff00; text-shadow: 1px 1px 8px #ffe400;">sol</strong> e minha <strong style="color: #00ffff; text-shadow: 1px 1px 8px #00ced1;">aventura mais linda</strong>! <span class="emoticon" style="font-size: 3.2rem;">🌞</span> Te amo hoje e <strong style="color: #ff0000; text-shadow: 1px 1px 8px #dc143c;">sempre</strong>!<br><br>
+        Obrigado por todos os <strong style="color: #87cefa; text-shadow: 1px 1px 8px #6495ed;">momentos incríveis</strong>, e espero que você <strong style="color: #ffc0cb; text-shadow: 1px 1px 8px #ffb6c1;">nunca deixe de me amar</strong>. Você é minha <strong style="color: #fffacd; text-shadow: 1px 1px 8px #eee8aa;">luz</strong> e minha <strong style="color: #adff2f; text-shadow: 1px 1px 8px #9acd32;">direção</strong>. Você é e sempre será minha <strong style="color: #ff69b4; text-shadow: 1px 1px 8px #ff1493;">menina</strong> e o <strong style="color: #ff4500; text-shadow: 1px 1px 8px #ff8c00;">amor da minha vida</strong>.<br>
+        Amo <strong style="color: #f0e68c; text-shadow: 1px 1px 8px #e6e6fa;">compartilhar momentos</strong> e <strong style="color: #e0ffff; text-shadow: 1px 1px 8px #afeeee;">tempo com você</strong>, além de ser minha namorada, é minha <strong style="color: #00ff7f; text-shadow: 1px 1px 8px #3cb371;">melhor amiga</strong> e a <strong style="color: #ba55d3; text-shadow: 1px 1px 8px #9400d3;">futura mãe dos meus filhos</strong>.<br>
+        Amo <strong style="color: #d8bfd8; text-shadow: 1px 1px 8px #c71585;">tudo em você</strong>: seu cabelo, seus olhos, sua boca, e o mais importante, o <strong style="color: #fa8072; text-shadow: 1px 1px 8px #e9967a;">coração incrível que você tem</strong> que transmite uma alegria através desse <strong style="color: #ffff00; text-shadow: 1px 1px 8px #ffd700;">sorriso lindo que só você tem</strong> <span class="emoticon" style="font-size: 3.2rem;">🤍</span>
+      </p>
+
+      <div class="gallery">
+        <div class="gallery-item-wrapper">
+            <div class="polaroid-frame">
+                <div class="gallery-item" data-video-url="C:\Users\cidirma\Desktop\site-lucas\video1.mp4">
+                    <img src="C:\Users\cidirma\Desktop\site-lucas\foto1.jfif" alt="Foto 1">
+                    <div class="caption">nosso conto</div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-item-wrapper">
+            <div class="polaroid-frame">
+                <div class="gallery-item" data-video-url="C:\Users\cidirma\Desktop\site-lucas\video4.mp4">
+                    <img src="C:\Users\cidirma\Desktop\site-lucas\foto2.jfif" alt="Foto 2">
+                    <div class="caption">Nossa Historia</div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-item-wrapper">
+            <div class="polaroid-frame">
+                <div class="gallery-item" data-video-url="C:\Users\cidirma\Desktop\site-lucas\video3.mp4">
+                    <img src="C:\Users\cidirma\Desktop\site-lucas\foto3.jfif" alt="Foto 3">
+                    <div class="caption">Minha felicidade</div>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-item-wrapper">
+            <div class="polaroid-frame">
+                <div class="gallery-item" data-video-url="C:\Users\cidirma\Desktop\site-lucas\video2.mp4">
+                    <img src="C:\Users\cidirma\Desktop\site-lucas\foto4.jfif" alt="Foto 4">
+                    <div class="caption">Momentos Unicos</div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">Criado com ✨ magia ✨ em um conto de fadas só nosso — Te amo mais que todas as estrelas do universo, Beatriz 💖🌌</footer>
+  </main>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="assets/audio.mp3" type="audio/mp3" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+      <span class="close-button" onclick="closeVideoModal()">×</span>
+      <div class="video-wrapper">
+        </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMessage() {
+      const msg = document.getElementById("msg");
+      const galleryItems = document.querySelectorAll('.gallery-item-wrapper');
+
+      if (msg.style.display === "block") {
+        msg.classList.remove("fadeInMessage");
+        msg.style.display = "none";
+      } else {
+        msg.style.display = "block";
+        msg.classList.add("fadeInMessage");
+
+        galleryItems.forEach((item, index) => {
+          item.style.animation = 'none';
+          item.offsetHeight;
+          item.style.animation = `itemFadeIn 1s ease-out forwards ${0.2 * index}s`;
+        });
+        msg.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function openVideoModal(videoUrl) {
+      const videoModal = document.getElementById('videoModal');
+      const videoWrapper = videoModal.querySelector('.video-wrapper');
+      videoWrapper.innerHTML = '';
+
+      const isYouTube = videoUrl.includes('youtube.com/') || videoUrl.includes('youtu.be/');
+
+      if (isYouTube) {
+        const iframe = document.createElement('iframe');
+        let embedUrl = videoUrl;
+        if (videoUrl.includes('watch?v=')) {
+          embedUrl = videoUrl.replace('watch?v=', 'embed/');
+        } else if (videoUrl.includes('youtu.be/')) {
+          embedUrl = videoUrl.replace('youtu.be/', 'youtube.com/embed/');
+        }
+        embedUrl = embedUrl.split('&t=')[0].split('?t=')[0];
+        iframe.setAttribute('src', embedUrl + '?autoplay=1&mute=0');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        videoWrapper.appendChild(iframe);
+      } else {
+        const video = document.createElement('video');
+        video.setAttribute('src', videoUrl);
+        video.setAttribute('controls', '');
+        video.setAttribute('autoplay', '');
+        video.setAttribute('loop', '');
+        video.setAttribute('playsinline', '');
+        videoWrapper.appendChild(video);
+      }
+
+      videoModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      const videoModal = document.getElementById('videoModal');
+      const videoWrapper = videoModal.querySelector('.video-wrapper');
+      videoWrapper.innerHTML = '';
+      videoModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const videoUrl = item.getAttribute('data-video-url');
+        if (videoUrl) {
+          openVideoModal(videoUrl);
+        }
+      });
+    });
+
+    document.getElementById('videoModal').addEventListener('click', function(event) {
+      if (event.target === this) {
+        closeVideoModal();
+      }
+    });
+
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('bgMusic');
+      audio.volume = 0.5;
+      const tryPlay = () => {
+        audio.play().catch(() => {
+          document.body.addEventListener('click', () => {
+            audio.play();
+          }, {
+            once: true
+          });
+        });
+      };
+      tryPlay();
+    });
+  </script>
+</body>
+</html>
